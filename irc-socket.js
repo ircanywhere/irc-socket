@@ -180,7 +180,7 @@ Socket.prototype = create(events.EventEmitter.prototype, {
         }
 
         if (message.indexOf('\n') !== -1) {
-            throw new Error('Newline detected in message. Use multiple raws instead.');
+            message = message.split('\n')[0].replace(/\r/g, '');
         }
 
         this.impl.write(message + '\r\n', 'utf-8');
